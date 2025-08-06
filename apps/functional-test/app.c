@@ -9,6 +9,10 @@ void app_wake_from_backup(void) {
 }
 
 void app_setup(void) {
+    watch_enable_digital_output(RED);
+    watch_enable_digital_input(BTN_LIGHT);
+    watch_enable_pull_up(BTN_LIGHT);
+    /*
     watch_enable_display();
 
     watch_enable_buzzer();
@@ -19,8 +23,9 @@ void app_setup(void) {
     watch_enable_digital_input(BTN_LIGHT);
     watch_enable_digital_input(BTN_MODE);
     watch_enable_pull_down(BTN_ALARM);
-    watch_enable_pull_down(BTN_LIGHT);
+    watch_enable_pull_up(BTN_LIGHT);
     watch_enable_pull_down(BTN_MODE);
+    */
 }
 
 void app_prepare_for_standby(void) {
@@ -30,12 +35,23 @@ void app_wake_from_standby(void) {
 }
 
 bool app_loop(void) {
+    /*
+    watch_set_pin_level(RED, true);
+    delay_ms(1000);
+    watch_set_pin_level(RED, false);
+    delay_ms(1000);
+    */
+    watch_set_pin_level(RED, true);
+    if (!watch_get_pin_level(BTN_LIGHT)) {
+        watch_set_pin_level(RED, false);
+    }
+    /*
     static int last_button = 0;
     static int button = 0;
     static int8_t loop = 0;
 
     watch_set_pin_level(GREEN, false);
-    watch_set_pin_level(RED, false);
+    watch_set_pin_level(RED, true);
     if (watch_get_pin_level(BTN_ALARM)) {
         watch_set_pin_level(GREEN, true);
         button = 1;
@@ -68,6 +84,7 @@ bool app_loop(void) {
     }
 
     loop++;
+    */
 
     return false;
 }

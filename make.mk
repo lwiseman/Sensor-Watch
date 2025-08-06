@@ -170,7 +170,7 @@ SRCS += \
   $(TOP)/watch-library/shared/watch/watch_utility.c \
 
 DEFINES += \
-  -D__SAML22J18A__ \
+  -D__SAML22N18A__ \
   -DDONT_USE_CMSIS_INIT
 
 else
