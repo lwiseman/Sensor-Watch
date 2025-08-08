@@ -9,9 +9,20 @@ void app_wake_from_backup(void) {
 }
 
 void app_setup(void) {
+    /*
     watch_enable_digital_output(RED);
+    watch_enable_digital_output(GREEN);
     watch_enable_digital_input(BTN_LIGHT);
     watch_enable_pull_up(BTN_LIGHT);
+    */
+    watch_enable_digital_output(RED);
+    watch_enable_digital_output(GREEN);
+    watch_enable_digital_input(BTN_ALARM);
+    watch_enable_digital_input(BTN_LIGHT);
+    watch_enable_digital_input(BTN_MODE);
+    watch_enable_pull_up(BTN_ALARM);
+    watch_enable_pull_up(BTN_LIGHT);
+    watch_enable_pull_up(BTN_MODE);
     /*
     watch_enable_display();
 
@@ -35,16 +46,27 @@ void app_wake_from_standby(void) {
 }
 
 bool app_loop(void) {
+    if (!(watch_get_pin_level(BTN_ALARM)
+       && watch_get_pin_level(BTN_LIGHT)
+       && watch_get_pin_level(BTN_MODE))) {
+        watch_set_pin_level(RED, false);
+        watch_set_pin_level(GREEN, false);
+    } else {
+        watch_set_pin_level(RED, true);
+        watch_set_pin_level(GREEN, true);
+    }
     /*
-    watch_set_pin_level(RED, true);
-    delay_ms(1000);
-    watch_set_pin_level(RED, false);
-    delay_ms(1000);
+    if (!(watch_get_pin_level(BTN_ALARM) && watch_get_pin_level(BTN_LIGHT))) {
+        watch_set_led_color(255, 255);
+    } else {
+        watch_set_led_off();
+    }
     */
-    watch_set_pin_level(RED, true);
+    /*
     if (!watch_get_pin_level(BTN_LIGHT)) {
         watch_set_pin_level(RED, false);
     }
+    */
     /*
     static int last_button = 0;
     static int button = 0;

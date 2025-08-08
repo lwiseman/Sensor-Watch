@@ -30,7 +30,8 @@
 void _watch_init(void) {
     // disable the LED pin (it may have been enabled by the bootloader)
 //    watch_disable_digital_output(GPIO(GPIO_PORTA, 20));
-    watch_disable_digital_output(GPIO(GPIO_PORTC, 27));
+    watch_disable_digital_output(RED); // TODO: hard-coded
+    watch_disable_digital_output(GREEN); // TODO: hard-coded
 
     // disable debugger hot-plugging
     gpio_set_pin_function(SWCLK, GPIO_PIN_FUNCTION_OFF);
