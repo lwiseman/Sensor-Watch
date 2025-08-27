@@ -79,6 +79,8 @@ typedef volatile       uint8_t  RwReg8;  /**< Read-Write  8-bit register (volati
 #define _L_(x)         x                 /**< Assembler: Long integer literal constant value */
 #define _UL_(x)        x                 /**< Assembler: Unsigned Long integer literal constant value */
 #endif /* !(defined(__ASSEMBLY__) || defined(__IAR_SYSTEMS_ASM__)) */
+#else
+  #error "LEVI: SKIP_INTEGER_LITERALS IS DEFINED"
 #endif /* SKIP_INTEGER_LITERALS */
 
 /* ************************************************************************** */

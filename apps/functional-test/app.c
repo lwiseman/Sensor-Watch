@@ -23,6 +23,11 @@ void app_setup(void) {
     watch_enable_pull_up(BTN_ALARM);
     watch_enable_pull_up(BTN_LIGHT);
     watch_enable_pull_up(BTN_MODE);
+
+    watch_enable_leds();
+
+    PORT->Group[0].PINCFG[30].bit.PMUXEN = 1;
+    PORT->Group[0].PMUX[30 / 2].reg |= PORT_PMUX_PMUXE_H;
     /*
     watch_enable_display();
 
@@ -46,15 +51,26 @@ void app_wake_from_standby(void) {
 }
 
 bool app_loop(void) {
+    /*
+    watch_set_led_color(0, 0);
+    delay_ms(5000);
+    watch_set_led_color(255, 255);
+    delay_ms(4000);
+    */
+    /*
+    static uint8_t level = 0;
     if (!(watch_get_pin_level(BTN_ALARM)
        && watch_get_pin_level(BTN_LIGHT)
        && watch_get_pin_level(BTN_MODE))) {
-        watch_set_pin_level(RED, false);
-        watch_set_pin_level(GREEN, false);
+        //watch_set_pin_level(RED, false);
+        //watch_set_pin_level(GREEN, false);
+        watch_set_led_color(0, 0);
     } else {
-        watch_set_pin_level(RED, true);
-        watch_set_pin_level(GREEN, true);
+        //watch_set_pin_level(RED, true);
+        //watch_set_pin_level(GREEN, true);
+        watch_set_led_color(255, 255);
     }
+    */
     /*
     if (!(watch_get_pin_level(BTN_ALARM) && watch_get_pin_level(BTN_LIGHT))) {
         watch_set_led_color(255, 255);
@@ -67,30 +83,26 @@ bool app_loop(void) {
         watch_set_pin_level(RED, false);
     }
     */
-    /*
     static int last_button = 0;
     static int button = 0;
-    static int8_t loop = 0;
+    static uint8_t level = 0;
 
-    watch_set_pin_level(GREEN, false);
-    watch_set_pin_level(RED, true);
-    if (watch_get_pin_level(BTN_ALARM)) {
-        watch_set_pin_level(GREEN, true);
+    if (!watch_get_pin_level(BTN_ALARM)) {
         button = 1;
-    } else if (watch_get_pin_level(BTN_LIGHT)) {
-        watch_set_pin_level(RED, true);
+    } else if (!watch_get_pin_level(BTN_LIGHT)) {
         button = 2;
-    } else if (watch_get_pin_level(BTN_MODE)) {
-        watch_set_pin_level(GREEN, true);
-        watch_set_pin_level(RED, true);
+    } else if (!watch_get_pin_level(BTN_MODE)) {
         button = 3;
     }
 
     if (button != last_button) {
         last_button = button;
+        level = (level + 16) % 256;
+        watch_set_led_color(level, level);
         watch_buzzer_play_note(BUZZER_NOTE_C8, 100);
     }
 
+    /*
     static const bool segmap[3][24] = {
        //0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
         {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
