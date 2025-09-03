@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "watch.h"
 
 void app_init(void) {
@@ -26,8 +27,14 @@ void app_setup(void) {
 
     watch_enable_leds();
 
+    gpio_set_pin_direction(GPIO(GPIO_PORTA, 30), GPIO_DIRECTION_OUT);
+    //gpio_set_pin_level(GPIO(GPIO_PORTA, 30), 1);
     PORT->Group[0].PINCFG[30].bit.PMUXEN = 1;
     PORT->Group[0].PMUX[30 / 2].reg |= PORT_PMUX_PMUXE_H;
+    GCLK->GENCTRL[0].bit.OE = 1;
+    //GCLK->GENCTRL[0].bit.OOV = 0;
+    while (GCLK->SYNCBUSY.reg)
+        ;
     /*
     watch_enable_display();
 
@@ -86,6 +93,10 @@ bool app_loop(void) {
     static int last_button = 0;
     static int button = 0;
     static uint8_t level = 0;
+    static int per_i = 0;
+    static uint32_t pers[] = { 1024 - 1, 32768 - 1 };
+    //int per_n = sizeof(pers) / sizeof(*pers);
+    int per_n = 2;
 
     if (!watch_get_pin_level(BTN_ALARM)) {
         button = 1;
@@ -97,9 +108,22 @@ bool app_loop(void) {
 
     if (button != last_button) {
         last_button = button;
-        level = (level + 16) % 256;
-        watch_set_led_color(level, level);
-        watch_buzzer_play_note(BUZZER_NOTE_C8, 100);
+        //level = (level + 1) % 10;
+        //level = (level + 32) % 256;
+        //watch_set_led_color(level, level);
+        uint32_t period = hri_tcc_get_PER_reg(TCC0, TCC_PER_MASK);
+        level = (level + 1) % (int)log2(period);
+        hri_tcc_write_CCBUF_reg(TCC0, WATCH_RED_TCC_CHANNEL, pow(2, level));
+        hri_tcc_write_CCBUF_reg(TCC0, WATCH_GREEN_TCC_CHANNEL, pow(2, level));
+
+        /*
+        per_i = (per_i + 1) % per_n;
+        hri_tcc_write_PER_reg(TCC0, pers[per_i]);
+        hri_tcc_write_CCBUF_reg(TCC0, WATCH_RED_TCC_CHANNEL, pers[per_i] / 2);
+        hri_tcc_wait_for_sync(TCC0, TCC_SYNCBUSY_ENABLE);
+        */
+
+        //watch_buzzer_play_note(BUZZER_NOTE_C8, 100);
     }
 
     /*

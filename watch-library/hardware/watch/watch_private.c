@@ -150,6 +150,7 @@ void _watch_enable_tcc(void) {
         // if USB is enabled, we are running an 8 MHz clock.
         hri_tcc_write_CTRLA_reg(TCC0, TCC_CTRLA_PRESCALER_DIV8);
     } else {
+        //GCLK->GENCTRL[0].bit.OOV = 1;
         // otherwise it's 4 Mhz.
         hri_tcc_write_CTRLA_reg(TCC0, TCC_CTRLA_PRESCALER_DIV4);
     }
