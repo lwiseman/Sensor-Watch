@@ -10,6 +10,8 @@ void app_wake_from_backup(void) {
 }
 
 void app_setup(void) {
+    watch_enable_display();
+
     /*
     watch_enable_digital_output(RED);
     watch_enable_digital_output(GREEN);
@@ -25,8 +27,6 @@ void app_setup(void) {
     watch_enable_pull_up(BTN_LIGHT);
     watch_enable_pull_up(BTN_MODE);
 
-    watch_enable_leds();
-
     gpio_set_pin_direction(GPIO(GPIO_PORTA, 30), GPIO_DIRECTION_OUT);
     //gpio_set_pin_level(GPIO(GPIO_PORTA, 30), 1);
     PORT->Group[0].PINCFG[30].bit.PMUXEN = 1;
@@ -35,6 +35,18 @@ void app_setup(void) {
     //GCLK->GENCTRL[0].bit.OOV = 0;
     while (GCLK->SYNCBUSY.reg)
         ;
+
+    watch_enable_leds();
+
+    watch_set_pixel(0, 0);
+    watch_set_pixel(1, 0);
+    watch_set_pixel(2, 0);
+    watch_set_pixel(3, 0);
+    watch_set_pixel(4, 0);
+    watch_set_pixel(5, 0);
+    watch_set_pixel(6, 0);
+    watch_set_pixel(7, 0);
+
     /*
     watch_enable_display();
 
@@ -58,6 +70,7 @@ void app_wake_from_standby(void) {
 }
 
 bool app_loop(void) {
+    static int8_t loop = 0;
     /*
     watch_set_led_color(0, 0);
     delay_ms(5000);

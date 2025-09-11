@@ -20,7 +20,7 @@
 // <5=>8
 // <id> slcd_arch_com_num
 #ifndef CONF_SLCD_COM_NUM
-#define CONF_SLCD_COM_NUM 2
+#define CONF_SLCD_COM_NUM 5
 #endif
 
 // <o> Number of Segment Lines <1-44>
@@ -45,7 +45,7 @@
 // <3=>FOURTH
 // <id> slcd_arch_bias
 #ifndef CONF_SLCD_BIAS
-#define CONF_SLCD_BIAS 2
+#define CONF_SLCD_BIAS 3
 #endif
 
 #if CONF_SLCD_COM_NUM == 0 && CONF_SLCD_BIAS != 0
@@ -80,7 +80,7 @@
 // <3=>128
 // <id> slcd_arch_presc
 #ifndef CONF_SLCD_PRESC
-#define CONF_SLCD_PRESC 2
+#define CONF_SLCD_PRESC 0
 #endif
 
 // <o> Clock Divider
@@ -95,7 +95,7 @@
 // <7=>8
 // <id> slcd_arch_ckdiv
 #ifndef CONF_SLCD_CKDIV
-#define CONF_SLCD_CKDIV 4
+#define CONF_SLCD_CKDIV 7
 #endif
 
 /* TODO add frame frequency check */

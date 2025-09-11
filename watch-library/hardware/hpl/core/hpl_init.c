@@ -50,6 +50,8 @@
  */
 void _init_chip(void)
 {
+#define XSTR(x) STR(x)
+#define STR(x) #x
 	hri_nvmctrl_set_CTRLB_RWS_bf(NVMCTRL, CONF_NVM_WAIT_STATE);
 
 	_set_performance_level(2);
