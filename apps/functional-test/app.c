@@ -38,14 +38,10 @@ void app_setup(void) {
 
     watch_enable_leds();
 
-    watch_set_pixel(0, 0);
-    watch_set_pixel(1, 0);
-    watch_set_pixel(2, 0);
-    watch_set_pixel(3, 0);
-    watch_set_pixel(4, 0);
     watch_set_pixel(5, 0);
-    watch_set_pixel(6, 0);
-    watch_set_pixel(7, 0);
+    watch_set_pixel(4, 0);
+    watch_set_pixel(4, 1);
+    watch_set_pixel(3, 1);
 
     /*
     watch_enable_display();

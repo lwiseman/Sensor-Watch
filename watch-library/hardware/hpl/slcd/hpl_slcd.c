@@ -137,17 +137,23 @@ int32_t _slcd_sync_disable(struct _slcd_sync_device *dev)
 /**
  * \brief               Turn on a Segment
  */
-int32_t _slcd_sync_seg_on(struct _slcd_sync_device *dev, uint32_t seg)
+int32_t _slcd_sync_seg_on(struct _slcd_sync_device *dev, uint32_t pixel)
 {
-	return _slcd_sync_set_segment(dev, SLCD_COMNUM(seg), SLCD_SEGNUM(seg), true);
+	uint8_t com = SLCD_COMNUM(pixel);
+	uint8_t seg = SLCD_SEGNUM(pixel);
+	((uint64_t *)&(((Slcd *)dev->hw)->SDATAL0))[com] |= 1 << seg;
+	return ERR_NONE;
 }
 
 /**
  * \brief               Turn off a Segment
  */
-int32_t _slcd_sync_seg_off(struct _slcd_sync_device *dev, uint32_t seg)
+int32_t _slcd_sync_seg_off(struct _slcd_sync_device *dev, uint32_t pixel)
 {
-	return _slcd_sync_set_segment(dev, SLCD_COMNUM(seg), SLCD_SEGNUM(seg), false);
+	uint8_t com = SLCD_COMNUM(pixel);
+	uint8_t seg = SLCD_SEGNUM(pixel);
+	((uint32_t *)&(((Slcd *)dev->hw)->SDATAL0))[com] &= ~(1 << seg);
+	return ERR_NONE;
 }
 
 /**

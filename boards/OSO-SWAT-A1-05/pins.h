@@ -79,7 +79,8 @@
         (uint32_t)1 << 11 | \
         (uint32_t)1 << 12 | \
         (uint32_t)1 << 13 | \
-        (uint32_t)1 << 14 | 0)
+        (uint32_t)1 << 22 | \
+        (uint32_t)1 << 23 | 0)
 /*
 #define CONF_SLCD_LPENL (\
         (uint32_t)1 <<  6 | \
