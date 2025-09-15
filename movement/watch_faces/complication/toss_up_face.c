@@ -28,7 +28,7 @@
 #if __EMSCRIPTEN__
 #include <time.h>
 #else
-#include "saml22j18a.h"
+//#include "saml22j18a.h"
 #endif
 
 static const char heads[] = { '8', 'h', '4', 'E', '(' };

@@ -5,26 +5,28 @@
 #define VBUS_DET GPIO(GPIO_PORTC, 26)
 
 // Buttons
-#define BTN_ALARM GPIO(GPIO_PORTC, 16)
-#define WATCH_BTN_ALARM_EIC_CHANNEL 8
-#define BTN_LIGHT GPIO(GPIO_PORTC, 1)
-#define WATCH_BTN_LIGHT_EIC_CHANNEL 9
-#define BTN_MODE GPIO(GPIO_PORTC, 17)
-#define WATCH_BTN_MODE_EIC_CHANNEL 9 // TODO: any problems with C1 also using channel 9?
+#define BTN_ALARM GPIO(GPIO_PORTB, 4)
+#define WATCH_BTN_ALARM_EIC_CHANNEL 4
+//#define BTN_LIGHT GPIO(GPIO_PORTC, 1)
+//#define WATCH_BTN_LIGHT_EIC_CHANNEL 9
+#define BTN_LIGHT GPIO(GPIO_PORTB, 5)
+#define WATCH_BTN_LIGHT_EIC_CHANNEL 5
+#define BTN_MODE GPIO(GPIO_PORTC, 0)
+#define WATCH_BTN_MODE_EIC_CHANNEL 8 // TODO: any problems with C1 also using channel 9? this was using c17
 
 // Buzzer
-#define BUZZER GPIO(GPIO_PORTB, 17)
-#define WATCH_BUZZER_TCC_PINMUX PINMUX_PB17F_TCC0_WO5
-#define WATCH_BUZZER_TCC_CHANNEL 1
+#define BUZZER GPIO(GPIO_PORTC, 28)
+#define WATCH_BUZZER_TCC_PINMUX PINMUX_PC28F_TCC0_WO4
+#define WATCH_BUZZER_TCC_CHANNEL 0
 
 // LEDs
 #ifdef WATCH_IS_BLUE_BOARD
     #define WATCH_INVERT_LED_POLARITY
-    #define RED GPIO(GPIO_PORTB, 16)
-    #define WATCH_RED_TCC_PINMUX PINMUX_PB16F_TCC0_WO4
+    #define RED GPIO(GPIO_PORTA, 27)
+    #define WATCH_RED_TCC_PINMUX PINMUX_PA27F_TCC0_WO5
 //    #define RED GPIO(GPIO_PORTB, 17)
 //    #define WATCH_RED_TCC_PINMUX PINMUX_PB17F_TCC0_WO5
-    #define WATCH_RED_TCC_CHANNEL 0
+    #define WATCH_RED_TCC_CHANNEL 1
     #define GREEN GPIO(GPIO_PORTC, 27)
     #define WATCH_GREEN_TCC_CHANNEL 3
     #define WATCH_GREEN_TCC_PINMUX PINMUX_PC27F_TCC0_WO3
@@ -38,6 +40,7 @@
 #endif
 
 // Segment LCD
+/*
 #define SLCD0 GPIO(GPIO_PORTA, 6)
 #define SLCD1 GPIO(GPIO_PORTA, 7)
 #define SLCD2 GPIO(GPIO_PORTC, 5)
@@ -65,6 +68,7 @@
 #define SLCD24 GPIO(GPIO_PORTA, 11)
 #define SLCD25 GPIO(GPIO_PORTA, 11)
 #define SLCD26 GPIO(GPIO_PORTA, 11)
+*/
 // This board uses a slightly different pin mapping from the standard watch, and it's not enough to
 // just declare the pins. We also have to set the LCD Pin Enable register with the SLCD pins we're
 // using. These numbers are not port/pin numbers, but the "SLCD/LP[x]" numbers in the pinmux table.
@@ -79,8 +83,11 @@
         (uint32_t)1 << 11 | \
         (uint32_t)1 << 12 | \
         (uint32_t)1 << 13 | \
-        (uint32_t)1 << 22 | \
-        (uint32_t)1 << 23 | 0)
+        (uint32_t)1 << 15 | \
+        (uint32_t)1 << 18 | \
+        (uint32_t)1 << 19 | \
+        (uint32_t)1 << 20 | \
+        (uint32_t)1 << 21 | 0)
 /*
 #define CONF_SLCD_LPENL (\
         (uint32_t)1 <<  6 | \
@@ -110,7 +117,8 @@
 */
 // LPENH is for pins SLCD/LP[32..51], where bit 0 represents pin 32.
 #define CONF_SLCD_LPENH (\
-        0)
+        (uint32_t)1 << (36 - 32) | \
+        (uint32_t)1 << (38 - 32) | 0)
 /*
 #define CONF_SLCD_LPENH (\
         (uint32_t)1 << (36 - 32) | \
@@ -127,8 +135,8 @@
 */
 
 // 9-pin connector
-#define A0 GPIO(GPIO_PORTB, 4)
-#define WATCH_A0_EIC_CHANNEL 4
+#define A0 GPIO(GPIO_PORTB, 6)
+#define WATCH_A0_EIC_CHANNEL 6
 #define A1 GPIO(GPIO_PORTB, 1)
 #define WATCH_A1_EIC_CHANNEL 1
 #define A2 GPIO(GPIO_PORTB, 2)

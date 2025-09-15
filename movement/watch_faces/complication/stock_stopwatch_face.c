@@ -43,7 +43,7 @@
 #include <emscripten.h>
 #include <emscripten/html5.h>
 #else
-#include "../../../watch-library/hardware/include/saml22j18a.h"
+//#include "../../../watch-library/hardware/include/saml22j18a.h"
 #include "../../../watch-library/hardware/include/component/tc.h"
 #include "../../../watch-library/hardware/hri/hri_tc_l22.h"
 #endif

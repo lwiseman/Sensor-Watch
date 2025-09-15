@@ -10,6 +10,22 @@ void app_wake_from_backup(void) {
 }
 
 void app_setup(void) {
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 6), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 7), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 5), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 6), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 7), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 8), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 9), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 10), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 8), GPIO_PIN_FUNCTION_B); // SEG1
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 11), GPIO_PIN_FUNCTION_B); // SEG4
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 12), GPIO_PIN_FUNCTION_B); // SEG5
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 13), GPIO_PIN_FUNCTION_B); // SEG6
+    gpio_set_pin_function(GPIO(GPIO_PORTB, 11), GPIO_PIN_FUNCTION_B); // SEG7
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 16), GPIO_PIN_FUNCTION_B); // SEG16
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 18), GPIO_PIN_FUNCTION_B); // SEG18
+
     watch_enable_display();
 
     /*
@@ -23,9 +39,9 @@ void app_setup(void) {
     watch_enable_digital_input(BTN_ALARM);
     watch_enable_digital_input(BTN_LIGHT);
     watch_enable_digital_input(BTN_MODE);
-    watch_enable_pull_up(BTN_ALARM);
-    watch_enable_pull_up(BTN_LIGHT);
-    watch_enable_pull_up(BTN_MODE);
+    watch_enable_pull_down(BTN_ALARM);
+    watch_enable_pull_down(BTN_LIGHT);
+    watch_enable_pull_down(BTN_MODE);
 
     gpio_set_pin_direction(GPIO(GPIO_PORTA, 30), GPIO_DIRECTION_OUT);
     //gpio_set_pin_level(GPIO(GPIO_PORTA, 30), 1);
@@ -38,11 +54,52 @@ void app_setup(void) {
 
     watch_enable_leds();
 
-    watch_set_pixel(5, 0);
+    watch_set_pixel(0, 0);
+    watch_set_pixel(1, 0);
+    watch_set_pixel(2, 0);
+    watch_set_pixel(3, 0);
     watch_set_pixel(4, 0);
-    watch_set_pixel(4, 1);
-    watch_set_pixel(3, 1);
+    watch_set_pixel(5, 0);
+    watch_set_pixel(6, 0);
 
+    watch_set_pixel(0, 1);
+    watch_set_pixel(1, 1);
+    watch_set_pixel(2, 1);
+    watch_set_pixel(3, 1);
+    watch_set_pixel(4, 1);
+    watch_set_pixel(5, 1);
+    watch_set_pixel(6, 1);
+
+    watch_set_pixel(0, 2);
+    watch_set_pixel(1, 2);
+    watch_set_pixel(2, 2);
+    watch_set_pixel(3, 2);
+    watch_set_pixel(4, 2);
+    watch_set_pixel(5, 2);
+    watch_set_pixel(6, 2);
+
+    watch_set_pixel(0, 3);
+    watch_set_pixel(1, 3);
+    watch_set_pixel(2, 3);
+    watch_set_pixel(3, 3);
+    watch_set_pixel(4, 3);
+    watch_set_pixel(5, 3);
+    watch_set_pixel(6, 3);
+
+    watch_set_pixel(0, 4);
+    watch_set_pixel(1, 4);
+    watch_set_pixel(2, 4);
+    watch_set_pixel(3, 4);
+    watch_set_pixel(4, 4);
+    watch_set_pixel(5, 4);
+    watch_set_pixel(6, 4);
+
+    watch_set_pixel(0, 5);
+    watch_set_pixel(0, 6);
+
+    gpio_set_pin_direction(GPIO(GPIO_PORTC, 1), GPIO_DIRECTION_IN);
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 1), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_level(GPIO(GPIO_PORTC, 1), true);
     /*
     watch_enable_display();
 
@@ -107,11 +164,11 @@ bool app_loop(void) {
     //int per_n = sizeof(pers) / sizeof(*pers);
     int per_n = 2;
 
-    if (!watch_get_pin_level(BTN_ALARM)) {
+    if (watch_get_pin_level(BTN_ALARM)) {
         button = 1;
-    } else if (!watch_get_pin_level(BTN_LIGHT)) {
+    } else if (watch_get_pin_level(BTN_LIGHT)) {
         button = 2;
-    } else if (!watch_get_pin_level(BTN_MODE)) {
+    } else if (watch_get_pin_level(BTN_MODE)) {
         button = 3;
     }
 

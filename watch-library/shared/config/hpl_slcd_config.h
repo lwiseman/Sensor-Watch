@@ -162,7 +162,7 @@
 // <15=>3.5073V
 // <id> slcd_arch_contrast_adjust
 #ifndef CONF_SLCD_CONTRAST_ADJUST
-#define CONF_SLCD_CONTRAST_ADJUST 14
+#define CONF_SLCD_CONTRAST_ADJUST 7
 #endif
 
 // </h>

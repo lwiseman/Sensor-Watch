@@ -109,6 +109,7 @@ void delay_driver_init(void) {
 }
 
 void SEGMENT_LCD_0_PORT_init(void) {
+    /*
 	gpio_set_pin_function(SLCD0, GPIO_PIN_FUNCTION_B);
 	gpio_set_pin_function(SLCD1, GPIO_PIN_FUNCTION_B);
 	gpio_set_pin_function(SLCD2, GPIO_PIN_FUNCTION_B);
@@ -136,6 +137,7 @@ void SEGMENT_LCD_0_PORT_init(void) {
 	gpio_set_pin_function(SLCD24, GPIO_PIN_FUNCTION_B);
 	gpio_set_pin_function(SLCD25, GPIO_PIN_FUNCTION_B);
 	gpio_set_pin_function(SLCD26, GPIO_PIN_FUNCTION_B);
+    */
 }
 
 /**
