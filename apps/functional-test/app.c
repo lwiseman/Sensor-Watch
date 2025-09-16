@@ -108,6 +108,7 @@ void app_setup(void) {
 
     watch_set_pixel(7, 6);
 
+    /*
     watch_set_pixel(0, 7);
     watch_set_pixel(1, 7);
     watch_set_pixel(2, 7);
@@ -115,6 +116,7 @@ void app_setup(void) {
     watch_set_pixel(4, 7);
     watch_set_pixel(5, 7);
     watch_set_pixel(6, 7);
+    */
 
     watch_set_pixel(5, 8);
     watch_set_pixel(4, 8);
@@ -159,9 +161,15 @@ void app_setup(void) {
     watch_set_pixel(4, 23);
     watch_set_pixel(3, 23);
 
+    watch_display_character('A', 9);
+
+    watch_enable_digital_output(GPIO(GPIO_PORTC, 27));
+    watch_set_pin_level(GPIO(GPIO_PORTC, 27), true);
+    /*
     gpio_set_pin_function(GPIO(GPIO_PORTC, 27), GPIO_PIN_FUNCTION_OFF);
     gpio_set_pin_direction(GPIO(GPIO_PORTC, 27), GPIO_DIRECTION_OUT);
     gpio_set_pin_level(GPIO(GPIO_PORTC, 27), true);
+    */
     /*
     watch_enable_display();
 

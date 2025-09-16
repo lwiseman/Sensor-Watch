@@ -136,7 +136,7 @@ static const uint64_t Segment_Map[] = {
     0xc057965616179716, // Position 6, clock minutes (Segments A and D shared)
     0xc041804000018a81, // Position 7, clock minutes
     0xc043420203048382, // Position 8, clock seconds
-    0xc045440506468584, // Position 9, clock seconds
+    0x00672787C7A74707, // Position 9, clock seconds
 };
 
 static const uint8_t Num_Chars = 10;
