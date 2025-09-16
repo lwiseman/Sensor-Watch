@@ -23,13 +23,13 @@
 #ifdef WATCH_IS_BLUE_BOARD
     #define WATCH_INVERT_LED_POLARITY
     #define RED GPIO(GPIO_PORTA, 27)
+    #define WATCH_RED_TCC_CHANNEL 1
     #define WATCH_RED_TCC_PINMUX PINMUX_PA27F_TCC0_WO5
 //    #define RED GPIO(GPIO_PORTB, 17)
 //    #define WATCH_RED_TCC_PINMUX PINMUX_PB17F_TCC0_WO5
-    #define WATCH_RED_TCC_CHANNEL 1
-    #define GREEN GPIO(GPIO_PORTC, 27)
-    #define WATCH_GREEN_TCC_CHANNEL 3
-    #define WATCH_GREEN_TCC_PINMUX PINMUX_PC27F_TCC0_WO3
+    #define GREEN GPIO(GPIO_PORTA, 27)
+    #define WATCH_GREEN_TCC_CHANNEL 1
+    #define WATCH_GREEN_TCC_PINMUX PINMUX_PA27F_TCC0_WO5
 #else
     #define RED GPIO(GPIO_PORTA, 20)
     #define WATCH_RED_TCC_PINMUX PINMUX_PA20F_TCC0_WO6
@@ -83,11 +83,22 @@
         (uint32_t)1 << 11 | \
         (uint32_t)1 << 12 | \
         (uint32_t)1 << 13 | \
+        (uint32_t)1 << 14 | \
         (uint32_t)1 << 15 | \
+        (uint32_t)1 << 16 | \
+        (uint32_t)1 << 17 | \
         (uint32_t)1 << 18 | \
         (uint32_t)1 << 19 | \
         (uint32_t)1 << 20 | \
-        (uint32_t)1 << 21 | 0)
+        (uint32_t)1 << 21 | \
+        (uint32_t)1 << 22 | \
+        (uint32_t)1 << 23 | \
+        (uint32_t)1 << 24 | \
+        (uint32_t)1 << 25 | \
+        (uint32_t)1 << 26 | \
+        (uint32_t)1 << 27 | \
+        (uint32_t)1 << 30 | \
+        (uint32_t)1 << 31 | 0)
 /*
 #define CONF_SLCD_LPENL (\
         (uint32_t)1 <<  6 | \
@@ -118,7 +129,13 @@
 // LPENH is for pins SLCD/LP[32..51], where bit 0 represents pin 32.
 #define CONF_SLCD_LPENH (\
         (uint32_t)1 << (36 - 32) | \
-        (uint32_t)1 << (38 - 32) | 0)
+        (uint32_t)1 << (37 - 32) | \
+        (uint32_t)1 << (38 - 32) | \
+        (uint32_t)1 << (39 - 32) | \
+        (uint32_t)1 << (40 - 32) | \
+        (uint32_t)1 << (41 - 32) | \
+        (uint32_t)1 << (42 - 32) | \
+        (uint32_t)1 << (43 - 32) | 0)
 /*
 #define CONF_SLCD_LPENH (\
         (uint32_t)1 << (36 - 32) | \
@@ -154,6 +171,6 @@
 
 // interrupt mapping
 #define EXT_IRQ_AMOUNT 6
-#define CONFIG_EIC_EXTINT_MAP {0, PIN_PB00}, {1, PIN_PB01}, {2, PIN_PA02}, {3, PIN_PB03}, {6, PIN_PA22}, {7, PIN_PA23},
+#define CONFIG_EIC_EXTINT_MAP {0, PIN_PB00}, {1, PIN_PB01}, {4, PIN_PB04}, {3, PIN_PB03}, {5, PIN_PB05}, {8, PIN_PC00},
 
 #endif // PINS_H_INCLUDED

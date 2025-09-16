@@ -18,13 +18,31 @@ void app_setup(void) {
     gpio_set_pin_function(GPIO(GPIO_PORTA, 8), GPIO_PIN_FUNCTION_B);
     gpio_set_pin_function(GPIO(GPIO_PORTA, 9), GPIO_PIN_FUNCTION_B);
     gpio_set_pin_function(GPIO(GPIO_PORTA, 10), GPIO_PIN_FUNCTION_B);
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 11), GPIO_PIN_FUNCTION_B); // SEG0
     gpio_set_pin_function(GPIO(GPIO_PORTC, 8), GPIO_PIN_FUNCTION_B); // SEG1
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 9), GPIO_PIN_FUNCTION_B); // SEG2
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 10), GPIO_PIN_FUNCTION_B); // SEG3
     gpio_set_pin_function(GPIO(GPIO_PORTC, 11), GPIO_PIN_FUNCTION_B); // SEG4
     gpio_set_pin_function(GPIO(GPIO_PORTC, 12), GPIO_PIN_FUNCTION_B); // SEG5
     gpio_set_pin_function(GPIO(GPIO_PORTC, 13), GPIO_PIN_FUNCTION_B); // SEG6
     gpio_set_pin_function(GPIO(GPIO_PORTB, 11), GPIO_PIN_FUNCTION_B); // SEG7
+    gpio_set_pin_function(GPIO(GPIO_PORTB, 12), GPIO_PIN_FUNCTION_B); // SEG8
+    gpio_set_pin_function(GPIO(GPIO_PORTB, 13), GPIO_PIN_FUNCTION_B); // SEG9
+    gpio_set_pin_function(GPIO(GPIO_PORTB, 14), GPIO_PIN_FUNCTION_B); // SEG10
+    gpio_set_pin_function(GPIO(GPIO_PORTB, 15), GPIO_PIN_FUNCTION_B); // SEG11
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 14), GPIO_PIN_FUNCTION_B); // SEG12
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 15), GPIO_PIN_FUNCTION_B); // SEG13
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 14), GPIO_PIN_FUNCTION_B); // SEG14
+    gpio_set_pin_function(GPIO(GPIO_PORTA, 15), GPIO_PIN_FUNCTION_B); // SEG15
+                                                                      //
     gpio_set_pin_function(GPIO(GPIO_PORTC, 16), GPIO_PIN_FUNCTION_B); // SEG16
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 17), GPIO_PIN_FUNCTION_B); // SEG17
     gpio_set_pin_function(GPIO(GPIO_PORTC, 18), GPIO_PIN_FUNCTION_B); // SEG18
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 19), GPIO_PIN_FUNCTION_B); // SEG19
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 20), GPIO_PIN_FUNCTION_B); // SEG20
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 21), GPIO_PIN_FUNCTION_B); // SEG21
+    gpio_set_pin_function(GPIO(GPIO_PORTB, 16), GPIO_PIN_FUNCTION_B); // SEG22
+    gpio_set_pin_function(GPIO(GPIO_PORTB, 17), GPIO_PIN_FUNCTION_B); // SEG23
 
     watch_enable_display();
 
@@ -54,14 +72,6 @@ void app_setup(void) {
 
     watch_enable_leds();
 
-    watch_set_pixel(0, 0);
-    watch_set_pixel(1, 0);
-    watch_set_pixel(2, 0);
-    watch_set_pixel(3, 0);
-    watch_set_pixel(4, 0);
-    watch_set_pixel(5, 0);
-    watch_set_pixel(6, 0);
-
     watch_set_pixel(0, 1);
     watch_set_pixel(1, 1);
     watch_set_pixel(2, 1);
@@ -69,22 +79,6 @@ void app_setup(void) {
     watch_set_pixel(4, 1);
     watch_set_pixel(5, 1);
     watch_set_pixel(6, 1);
-
-    watch_set_pixel(0, 2);
-    watch_set_pixel(1, 2);
-    watch_set_pixel(2, 2);
-    watch_set_pixel(3, 2);
-    watch_set_pixel(4, 2);
-    watch_set_pixel(5, 2);
-    watch_set_pixel(6, 2);
-
-    watch_set_pixel(0, 3);
-    watch_set_pixel(1, 3);
-    watch_set_pixel(2, 3);
-    watch_set_pixel(3, 3);
-    watch_set_pixel(4, 3);
-    watch_set_pixel(5, 3);
-    watch_set_pixel(6, 3);
 
     watch_set_pixel(0, 4);
     watch_set_pixel(1, 4);
@@ -94,12 +88,80 @@ void app_setup(void) {
     watch_set_pixel(5, 4);
     watch_set_pixel(6, 4);
 
-    watch_set_pixel(0, 5);
-    watch_set_pixel(0, 6);
+    watch_set_pixel(7, 4);
 
-    gpio_set_pin_direction(GPIO(GPIO_PORTC, 1), GPIO_DIRECTION_IN);
-    gpio_set_pin_function(GPIO(GPIO_PORTC, 1), GPIO_PIN_FUNCTION_B);
-    gpio_set_pin_level(GPIO(GPIO_PORTC, 1), true);
+    watch_set_pixel(0, 5);
+    watch_set_pixel(1, 5);
+    watch_set_pixel(2, 5);
+    watch_set_pixel(3, 5);
+    watch_set_pixel(4, 5);
+    watch_set_pixel(5, 5);
+    watch_set_pixel(6, 5);
+
+    watch_set_pixel(0, 6);
+    watch_set_pixel(1, 6);
+    watch_set_pixel(2, 6);
+    watch_set_pixel(3, 6);
+    watch_set_pixel(4, 6);
+    watch_set_pixel(5, 6);
+    watch_set_pixel(6, 6);
+
+    watch_set_pixel(7, 6);
+
+    watch_set_pixel(0, 7);
+    watch_set_pixel(1, 7);
+    watch_set_pixel(2, 7);
+    watch_set_pixel(3, 7);
+    watch_set_pixel(4, 7);
+    watch_set_pixel(5, 7);
+    watch_set_pixel(6, 7);
+
+    watch_set_pixel(5, 8);
+    watch_set_pixel(4, 8);
+    watch_set_pixel(4, 9);
+    watch_set_pixel(3, 9);
+
+    watch_set_pixel(5, 10);
+    watch_set_pixel(4, 10);
+    watch_set_pixel(4, 11);
+    watch_set_pixel(3, 11);
+
+    watch_set_pixel(5, 12);
+    watch_set_pixel(4, 12);
+    watch_set_pixel(4, 13);
+    watch_set_pixel(3, 13);
+
+    watch_set_pixel(5, 14);
+    watch_set_pixel(4, 14);
+    watch_set_pixel(4, 15);
+    watch_set_pixel(3, 15);
+
+    watch_set_pixel(5, 16);
+    watch_set_pixel(4, 16);
+    watch_set_pixel(4, 17);
+    watch_set_pixel(3, 17);
+
+    watch_set_pixel(0, 16);
+    watch_set_pixel(0, 18);
+
+    watch_set_pixel(5, 18);
+    watch_set_pixel(4, 18);
+    watch_set_pixel(4, 19);
+    watch_set_pixel(3, 19);
+
+    watch_set_pixel(5, 20);
+    watch_set_pixel(4, 20);
+    watch_set_pixel(4, 21);
+    watch_set_pixel(3, 21);
+
+    watch_set_pixel(5, 22);
+    watch_set_pixel(4, 22);
+    watch_set_pixel(4, 23);
+    watch_set_pixel(3, 23);
+
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 27), GPIO_PIN_FUNCTION_OFF);
+    gpio_set_pin_direction(GPIO(GPIO_PORTC, 27), GPIO_DIRECTION_OUT);
+    gpio_set_pin_level(GPIO(GPIO_PORTC, 27), true);
     /*
     watch_enable_display();
 
