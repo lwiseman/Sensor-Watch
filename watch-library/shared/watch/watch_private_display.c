@@ -75,23 +75,14 @@ void watch_display_character(uint8_t character, uint8_t position) {
     uint64_t segmap = Segment_Map[position];
     uint64_t segdata = Character_Set[character - 0x20];
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; ++i, segmap >>= 8, segdata >>= 1) {
         uint8_t com = (segmap & 0xFF) >> 5;
-        if (i == 7) {
-            // COM3 means no segment exists; skip it.
-            segmap = segmap >> 8;
-            segdata = segdata >> 1;
-            continue;
-        }
         uint8_t seg = segmap & 0x1F;
 
         if (segdata & 1)
           watch_set_pixel(com, seg);
         else
           watch_clear_pixel(com, seg);
-
-        segmap = segmap >> 8;
-        segdata = segdata >> 1;
     }
 
     if (character == 'T' && position == 1) watch_set_pixel(1, 12); // add descender

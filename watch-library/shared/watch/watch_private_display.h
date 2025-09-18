@@ -132,10 +132,10 @@ static const uint64_t Segment_Map[] = {
     0xc049c00a49890949, // Position 2, day of month (Segments A, D, G shared; missing segment F)
     0xc048088886874707, // Position 3, day of month
     0xc053921252139352, // Position 4, clock hours (Segments A and D shared)
-    0xc054511415559594, // Position 5, clock hours
-    0xc057965616179716, // Position 6, clock minutes (Segments A and D shared)
-    0xc041804000018a81, // Position 7, clock minutes
-    0xc043420203048382, // Position 8, clock seconds
+    0x00612181C1A14101, // Position 5, clock hours
+    0x00642484C4A44404, // Position 6, clock minutes (Segments A and D shared)
+    0x00652585C5A54505, // Position 7, clock minutes
+    0x00662686C6A64606, // Position 8, clock seconds
     0x00672787C7A74707, // Position 9, clock seconds
 };
 

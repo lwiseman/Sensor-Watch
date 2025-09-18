@@ -3,6 +3,8 @@
 #include <math.h>
 #include "watch.h"
 
+void _watch_enable_tc3(void);
+
 void app_init(void) {
 }
 
@@ -72,6 +74,7 @@ void app_setup(void) {
 
     watch_enable_leds();
 
+    /*
     watch_set_pixel(0, 1);
     watch_set_pixel(1, 1);
     watch_set_pixel(2, 1);
@@ -87,9 +90,11 @@ void app_setup(void) {
     watch_set_pixel(4, 4);
     watch_set_pixel(5, 4);
     watch_set_pixel(6, 4);
+    */
 
     watch_set_pixel(7, 4);
 
+    /*
     watch_set_pixel(0, 5);
     watch_set_pixel(1, 5);
     watch_set_pixel(2, 5);
@@ -105,6 +110,7 @@ void app_setup(void) {
     watch_set_pixel(4, 6);
     watch_set_pixel(5, 6);
     watch_set_pixel(6, 6);
+    */
 
     watch_set_pixel(7, 6);
 
@@ -161,15 +167,21 @@ void app_setup(void) {
     watch_set_pixel(4, 23);
     watch_set_pixel(3, 23);
 
-    watch_display_character('A', 9);
+    watch_display_string("A", 5);
+    watch_display_string("B", 6);
+    watch_display_string("C", 7);
+    watch_display_string("D", 8);
+    watch_display_string("E", 9);
 
+    /*
     watch_enable_digital_output(GPIO(GPIO_PORTC, 27));
     watch_set_pin_level(GPIO(GPIO_PORTC, 27), true);
-    /*
-    gpio_set_pin_function(GPIO(GPIO_PORTC, 27), GPIO_PIN_FUNCTION_OFF);
-    gpio_set_pin_direction(GPIO(GPIO_PORTC, 27), GPIO_DIRECTION_OUT);
-    gpio_set_pin_level(GPIO(GPIO_PORTC, 27), true);
     */
+    _watch_enable_tc3();
+    gpio_set_pin_direction(GPIO(GPIO_PORTC, 27), GPIO_DIRECTION_OUT);
+    gpio_set_pin_function(GPIO(GPIO_PORTC, 27), PINMUX_PC27E_TC3_WO1);
+    //gpio_set_pin_function(GPIO(GPIO_PORTC, 27), PINMUX_PC27F_TCC0_WO3);
+    //gpio_set_pin_level(GPIO(GPIO_PORTC, 27), true);
     /*
     watch_enable_display();
 
@@ -184,6 +196,22 @@ void app_setup(void) {
     watch_enable_pull_up(BTN_LIGHT);
     watch_enable_pull_down(BTN_MODE);
     */
+}
+
+void _watch_enable_tc3(void) {
+    hri_gclk_write_PCHCTRL_reg(GCLK, TC3_GCLK_ID, GCLK_PCHCTRL_GEN_GCLK0_Val | GCLK_PCHCTRL_CHEN);
+    hri_mclk_set_APBCMASK_TC3_bit(MCLK);
+    hri_tc_clear_CTRLA_ENABLE_bit(TC3);
+    hri_tc_wait_for_sync(TC3, TC_SYNCBUSY_ENABLE);
+    hri_tc_write_CTRLA_reg(TC3, TC_CTRLA_SWRST);
+    hri_tc_wait_for_sync(TC3, TC_SYNCBUSY_SWRST);
+    hri_tc_write_CTRLA_reg(TC3, TC_CTRLA_PRESCALER_DIV1024 |
+                                TC_CTRLA_MODE_COUNT8 |
+                                TC_CTRLA_RUNSTDBY);
+    hri_tccount8_write_PER_reg(TC3, 50);
+    hri_tccount8_write_CC_CC_bf(TC3, 1, 50); // TODO: why is this about 50%?
+    hri_tc_write_WAVE_reg(TC3, TC_WAVE_WAVEGEN_NPWM);
+    hri_tc_set_CTRLA_ENABLE_bit(TC3);
 }
 
 void app_prepare_for_standby(void) {
